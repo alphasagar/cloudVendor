@@ -1,7 +1,10 @@
 package com.springbootpractice.demo.controller;
 
 import com.springbootpractice.demo.model.CloudVendor;
+import com.springbootpractice.demo.response.ResponseHandler;
 import com.springbootpractice.demo.service.CloudVendorService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,9 +22,11 @@ public class CloudVendorController
 
     //read specific cloud vendor details
     @GetMapping("{vendorId}")
-    public CloudVendor getCloudVendorDetails(@PathVariable("vendorId") String vendorId){
+    public ResponseEntity<Object> getCloudVendorDetails(@PathVariable("vendorId") String vendorId){
 
-        return cloudVendorService.getCloudVendor(vendorId);
+        //CUSTOM RESPONSE
+        return ResponseHandler.responseBuilder("Requested vendor details are given here", HttpStatus.OK,
+                cloudVendorService.getCloudVendor(vendorId));
 
     }
     // read all cloud vendors in DB
