@@ -1,5 +1,6 @@
 package com.springbootpractice.demo.service.impl;
 
+import com.springbootpractice.demo.exception.CloudVendorNotFoundException;
 import com.springbootpractice.demo.model.CloudVendor;
 import com.springbootpractice.demo.repository.CloudVendorRepository;
 import com.springbootpractice.demo.service.CloudVendorService;
@@ -41,6 +42,8 @@ public class CloudVendorServiceImpl implements CloudVendorService {
     @Override
     public CloudVendor getCloudVendor(String cloudVendorId) {
         // more business logic
+        if(cloudVendorRepository.findById(cloudVendorId).isEmpty())
+            throw new CloudVendorNotFoundException("Requested Cloud Vendor does not exist");
         return cloudVendorRepository.findById(cloudVendorId).get();
 
     }
