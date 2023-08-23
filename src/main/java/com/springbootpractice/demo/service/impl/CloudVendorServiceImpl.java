@@ -53,4 +53,10 @@ public class CloudVendorServiceImpl implements CloudVendorService {
         // more business logic
         return cloudVendorRepository.findAll();
     }
+
+    @Override
+    public List<CloudVendor> getByVendorName(String vendorName) {
+
+        return cloudVendorRepository.findByVendorName(vendorName);
+    }
 }
